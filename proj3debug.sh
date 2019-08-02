@@ -40,5 +40,5 @@ cat  -nb ./"$test_dir"/input/"$2".s
 echo_in_red "Hex:"
 echo "$2".hex
 cat  -n ./"$test_dir"/input/"$2".hex
-echo_in_red "Diff:"
-diff /tmp/w_mine.out /tmp/w_standard.out
+echo_in_red "Diff: (CORRECT vs MINE)"
+diff /tmp/w_standard.out /tmp/w_mine.out
