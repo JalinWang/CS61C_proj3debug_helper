@@ -36,7 +36,7 @@ python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/output/
 python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/output/CPU-"$2".out > /tmp/w_mine.out
 echo_in_red "Source:"
 echo "$2".s
-cat  -n ./"$test_dir"/input/"$2".s
+cat  -nb ./"$test_dir"/input/"$2".s
 echo_in_red "Hex:"
 echo "$2".hex
 cat  -n ./"$test_dir"/input/"$2".hex
