@@ -27,13 +27,13 @@ if [ "$2" == "" ]; then
     exit
 fi
 
-
+RAND_FILENAME=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 echo_in_red "CORRECT:"
 python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/reference_output/CPU-"$2".out
-python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/reference_output/CPU-"$2".out >/tmp/w_standard.out
+python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/reference_output/CPU-"$2".out >/tmp/"$RAND_FILENAME"_standard.out
 echo_in_red "MINE:"
 python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/output/CPU-"$2".out
-python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/output/CPU-"$2".out > /tmp/w_mine.out
+python3 ./"$test_dir"/circ_files/binary_to_hex.py "$test_dir"/circ_files/output/CPU-"$2".out > /tmp/"$RAND_FILENAME"_mine.out
 echo_in_red "Source:"
 echo "$2".s
 cat  -nb ./"$test_dir"/input/"$2".s
@@ -41,4 +41,6 @@ echo_in_red "Hex:"
 echo "$2".hex
 cat  -n ./"$test_dir"/input/"$2".hex
 echo_in_red "Diff: (CORRECT vs MINE)"
-diff /tmp/w_standard.out /tmp/w_mine.out
+diff /tmp/"$RAND_FILENAME"_standard.out /tmp/"$RAND_FILENAME"_mine.out
+rm /tmp/"$RAND_FILENAME"_standard.out
+rm /tmp/"$RAND_FILENAME"_mine.out
